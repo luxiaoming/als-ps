@@ -1,0 +1,26 @@
+
+
+
+上层通过一个线程，一直读取光感传感器的数值。
+具体实现在com_mediatek_factorymode_OpticalActivity.c 文件里面：
+
+
+打开设备：
+
+#define MTK_ALSPS_DEVICE "/dev/als_ps"
+
+通过使用提供的
+
+ioctl(fd, ALSPS_GET_ALS_RAW_DATA, &als_data)
+
+将硬件设备信息读取到上层，然后存储在文本里面。
+
+
+----------------
+此驱动接口只支持mtk平台，其他的需要查看/dev下的设备进行分析。
+此apk必须有系统权限，否则没法打开设备。
+
+
+测试apk，
+手机必须root，然后将apk放在system/priv-app下
+将libengmodjni.so放在system/lib下进行测试即可。
